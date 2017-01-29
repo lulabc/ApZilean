@@ -1,0 +1,2 @@
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\Debug\ApZilean.exe.config
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\obj\Debug\ApZilean.csprojResolveAssemblyReference.cache

@@ -1,0 +1,12 @@
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\ApZilean.exe.config
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\ApZilean.exe
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\ApZilean.pdb
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\EloBuddy.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\EloBuddy.SDK.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\SharpDX.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\SharpDX.Direct3D9.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\EloBuddy.Sandbox.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\bin\x86\Debug\Newtonsoft.Json.dll
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\obj\x86\Debug\ApZilean.exe
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\obj\x86\Debug\ApZilean.pdb
+c:\users\zero0day\documents\visual studio 2015\Projects\ApZilean\ApZilean\obj\x86\Debug\ApZilean.csprojResolveAssemblyReference.cache
