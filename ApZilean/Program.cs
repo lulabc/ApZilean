@@ -21,6 +21,9 @@ namespace ApZilean
         public static Spell.Active W;
         public static Spell.Targeted E;
         public static Spell.Targeted R;
+        static readonly List<UnitIncomingDamage> IncomingDamageList = new List<UnitIncomingDamage>();
+        static readonly List<AIHeroClient> ChampionList = new List<AIHeroClient>();
+        private static readonly Dictionary<int, PredictedDamage> ActiveAttacks = new Dictionary<int, PredictedDamage>();
         private static List<Spell.SpellBase> SpellList = new List<Spell.SpellBase>();
 
         static void Main(string[] args)
@@ -71,7 +74,13 @@ namespace ApZilean
             SpellList.Add(Q);
             SpellList.Add(E);
             SpellList.Add(R);
-
+            
+            if (Player.Instance.ChampionName != "Zilean") return;
+            foreach (var hero in ObjectManager.Get<AIHeroClient>())
+            {
+                ChampionList.Add(hero);
+            }
+            
             ApZileanMenu = MainMenu.AddMenu("ApZilean", "ApZilean");
 
             ComboMenu = ApZileanMenu.AddSubMenu("Combo");
@@ -106,6 +115,7 @@ namespace ApZilean
 
         private static void Game_OnTick(EventArgs args)
         {
+            IncomingDamageList.RemoveAll(damage => time < damage.Time);
             if (Orbwalker.ActiveModesFlags.Equals(Orbwalker.ActiveModes.Combo))
             {
                 ComboVombo();
@@ -149,8 +159,9 @@ namespace ApZilean
             {
                 var pos = Game.CursorPos;
                 Q.Cast(pos);
-                W.Cast();
-                Q.Cast(pos);
+                if (!Q.IsReady())
+                { W.Cast();
+                Q.Cast(pos); }
             }
 
             if (autoUltValue != 0 && R.IsReady() && R.ManaCost <= Zilean.Mana)
@@ -162,13 +173,15 @@ namespace ApZilean
                 }
                 if (MiscMenu["autoUltAllies"].Cast<CheckBox>().CurrentValue)
                 {
-                    var Allies = EntityManager.Heroes.Allies.Where(x => !x.IsDead && x.IsValidTarget() && x.HealthPercent <= autoUltValue && R.IsInRange(x)).OrderByDescending(x => x.Health);
-                    foreach (var t in Allies)
-                    {
-                        //Кто успел тот и съел, но себя люблю больше - translate it xD
-                        if (t.CountEnemyChampionsInRange(880) >= 1)
-                            if (t.HealthPercent <= autoUltValue) R.Cast(t);
-                    }
+                   foreach (var hero in ObjectManager.Get<AIHeroClient>().Where(x => x.IsAlly && x.Distance(Player.Instance) <= R.Range))
+                   {
+                     var UltValid = ValidUlt(hero);
+                     double dmg = GetIncomingDamage(hero, 1);
+                         if (UltValid && (hero.Health - dmg < hero.Level * 15 || hero.Health <= GetIncomingDamage(hero, 5)))
+                         {
+                            R.Cast(hero);
+                         }
+                   }
                 }
             }
 
