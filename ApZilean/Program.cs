@@ -75,12 +75,7 @@ namespace ApZilean
             SpellList.Add(E);
             SpellList.Add(R);
             
-            if (Player.Instance.ChampionName != "Zilean") return;
-            foreach (var hero in ObjectManager.Get<AIHeroClient>())
-            {
-                ChampionList.Add(hero);
-            }
-            
+               
             ApZileanMenu = MainMenu.AddMenu("ApZilean", "ApZilean");
 
             ComboMenu = ApZileanMenu.AddSubMenu("Combo");
@@ -160,8 +155,10 @@ namespace ApZilean
                 var pos = Game.CursorPos;
                 Q.Cast(pos);
                 if (!Q.IsReady())
-                { W.Cast();
-                Q.Cast(pos); }
+                {
+                  W.Cast();
+                  Q.Cast(pos);
+                }
             }
 
             if (autoUltValue != 0 && R.IsReady() && R.ManaCost <= Zilean.Mana)
